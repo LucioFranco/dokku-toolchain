@@ -13,8 +13,11 @@
   "keywords": [
     "dokku"
   ],
-  "author": "Lucio Franco <lucio.franco@du.edu>",
-  "license": "ISC",
+  "author": {
+    "name": "Lucio Franco",
+    "email": "lucio.franco@du.edu"
+  },
+  "license": "GNU",
   "bugs": {
     "url": "https://github.com/LucioFranco/dok/issues"
   },
@@ -23,5 +26,9 @@
     "commander": "^2.7.1",
     "jsonfile": "^2.0.0",
     "simple-ssh": "^0.8.4"
+  },
+  "preferGlobal": "true",
+  "bin": {
+    "dokku": "index.js"
   }
 }
