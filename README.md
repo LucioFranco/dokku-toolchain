@@ -17,6 +17,10 @@ To add a git remote just run
 ```
 dok add <appname>
 ```
+To push to the remote run
+```
+dok push <branch>
+```
 To remove the remote run
 ```
 dok remove
