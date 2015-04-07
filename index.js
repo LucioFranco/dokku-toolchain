@@ -1,3 +1,4 @@
+#! /usr/bin/env node
 var app = require('commander');
 var SSH = require('simple-ssh');
 var jf = require('jsonfile');

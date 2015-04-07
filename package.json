@@ -29,6 +29,6 @@
   },
   "preferGlobal": "true",
   "bin": {
-    "dokku": "index.js"
+    "dok": "index.js"
   }
 }
