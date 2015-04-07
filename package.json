@@ -1,0 +1,27 @@
+{
+  "name": "dok",
+  "version": "1.0.0",
+  "description": "Simple dokku toolbelt inspired from Heroku toolbelt",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LucioFranco/dok"
+  },
+  "keywords": [
+    "dokku"
+  ],
+  "author": "Lucio Franco <lucio.franco@du.edu>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LucioFranco/dok/issues"
+  },
+  "homepage": "https://github.com/LucioFranco/dok",
+  "dependencies": {
+    "commander": "^2.7.1",
+    "jsonfile": "^2.0.0",
+    "simple-ssh": "^0.8.4"
+  }
+}
