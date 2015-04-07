@@ -12,7 +12,7 @@ function getCommand(cmd) {
 
 describe('Dokku-toolchain tests', function () {
   it('Should have 4 commands', function () {
-    app.commands.should.have.length(5);
+    app.commands.should.have.length(7);
   });
 
   it('Add command should have 1 argument', function () {
@@ -20,8 +20,13 @@ describe('Dokku-toolchain tests', function () {
     cmd._args.should.have.length(1);
   });
 
-  it('Set command shold have 3 arguments', function () {
+  it('Set command should have 3 arguments', function () {
     var cmd = getCommand('set');
     cmd._args.should.have.length(3);
+  });
+
+  it('Push command should have 1 argument', function () {
+    var cmd = getCommand('push');
+    cmd._args.should.have.length(1);
   });
 });

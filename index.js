@@ -26,22 +26,63 @@ app
         process.exit(1);
       }else {
         server = obj.host;
+        var url = 'dokku@' + server + ':' + appname;
+        fs.exists('.git', function (exists) {
+          if (exists) {
+            exec('git remote add dokku ' + url, {},function (err, out, code) {
+              if (err) {
+                console.log(err)
+                process.exit(code);
+              }else {
+                console.log('Sucessfully added git remote.');
+                console.log('To push run git push dokku <branch>');
+              }
+            });
+          }else {
+            console.log('This directory is not a git repo');
+          }
+        });
       }
     });
-    var url = 'dokku@' + server + ':' + appname;
+  });
+
+// server command
+// allows user to see hostname and username for dokku server
+app
+  .command('server')
+  .description('gets hostname and username for dokku server')
+  .action(function () {
+    jf.readFile('config.json', function (err, file) {
+      if (err) {
+        console.log('You need to add a server');
+        console.log('Please run dok set <hostname> <username> <password>');
+        process.exit(1);
+      }else {
+        console.log('Server:');
+        console.log('Host:' + file.host);
+        console.log('User:' + file.user);
+      }
+    });
+  });
+
+// push <branch> command
+// allows user to push to the dokku server
+app
+  .command('push <branch>')
+  .description('push to the dokku server')
+  .action(function (branch) {
     fs.exists('.git', function (exists) {
       if (exists) {
-        exec('git remote add dokku ' + url, {},function (err, out, code) {
+        exec('git push dokku ' + branch, {}, function (err, out, code) {
           if (err) {
-            console.log(err)
-            process.exit(code);
+            console.log('Could not push to remote');
           }else {
-            console.log('Sucessfully added git remote.');
-            console.log('To push run git push dokku <branch>');
+            console.log(out);
+            console.log(code);
           }
         });
       }else {
-        console.log('This directory is not a git repo');
+        console.log('This is not a git repo');
       }
     });
   });
@@ -65,7 +106,7 @@ app
       }else {
         console.log('This is not a git repo');
       }
-    })
+    });
   });
 
 // set <hostname> <username> <password> command
