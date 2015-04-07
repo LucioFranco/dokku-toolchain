@@ -2,7 +2,7 @@
 Simple dokku toolbelt inspired by Heroku toolbelt
 
 # Usage
-Before you can access the server you must put in your credinetials. You must run dok set command first.
+Before you can access the server you must put in your credentials. You must run dok set command first.
 ```
 dok set <hostname> <username> <password>
 ```
