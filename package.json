@@ -1,6 +1,6 @@
 {
   "name": "dok",
-  "version": "1.0.0",
+  "version": "0.5.0",
   "description": "Simple dokku toolbelt inspired from Heroku toolbelt",
   "main": "index.js",
   "scripts": {
