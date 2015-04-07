@@ -3,9 +3,22 @@ var app = require('commander');
 var SSH = require('simple-ssh');
 var jf = require('jsonfile');
 var util = require('util');
+var pkg = require('./package.json')
+
+function getVersion() {
+  jf.readFileSync('package.json', function (err, res) {
+    if (err) {
+      console.log(err);
+      process.exit(1);
+    }else {
+      console.log(res);
+      return res.verison;
+    }
+  });
+}
 
 app
-  .version('1.0.0');
+  .version(pkg.version);
 
 app
   .command('help')
@@ -81,3 +94,5 @@ app
   });
 
 app.parse(process.argv);
+
+module.exports = app;
