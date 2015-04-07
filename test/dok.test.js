@@ -15,12 +15,12 @@ describe('Dokku-toolchain tests', function () {
     app.commands.should.have.length(5);
   });
 
-  it('set command', function () {
+  it('Add command should have 1 argument', function () {
     var cmd = getCommand('add');
-    cmd._args.should.have.length(2);
+    cmd._args.should.have.length(1);
   });
 
-  it('add command', function () {
+  it('Set command shold have 3 arguments', function () {
     var cmd = getCommand('set');
     cmd._args.should.have.length(3);
   });

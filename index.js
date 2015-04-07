@@ -1,19 +1,33 @@
 #! /usr/bin/env node
-var app = require('commander');
-var SSH = require('simple-ssh');
-var jf = require('jsonfile');
-var util = require('util');
-var fs = require('fs');
-var pkg = require('./package.json');
-var exec = require('child_process').exec;
+
+var app = require('commander'),
+    SSH = require('simple-ssh'),
+    jf = require('jsonfile'),
+    util = require('util'),
+    fs = require('fs'),
+    pkg = require('./package.json'),
+    exec = require('child_process').exec;
 
 app
   .version(pkg.version);
 
+// add <appname> command
+// allows user to add git remote name dokku for their server
+// in their config.json
 app
-  .command('add <server> <appname>')
+  .command('add <appname>')
   .description('adds dokku remote to your git repo')
-  .action(function (server, appname) {
+  .action(function (appname) {
+    var server = 'localhost';
+    jf.readFile('config.json', function (err, obj) {
+      if (err) {
+        console.log('You need to add a server');
+        console.log('Please run dok set <hostname> <username> <password>');
+        process.exit(1);
+      }else {
+        server = obj.host;
+      }
+    });
     var url = 'dokku@' + server + ':' + appname;
     fs.exists('.git', function (exists) {
       if (exists) {
@@ -32,6 +46,9 @@ app
     });
   });
 
+// remove command
+// allows user to remove the remote that they added using
+// the add command
 app
   .command('remove')
   .description('removes the dokku remote from your git repo')
@@ -51,6 +68,9 @@ app
     })
   });
 
+// set <hostname> <username> <password> command
+// allows user to setup their dokku server with dok
+// places information into config.json
 app
   .command('set <hostname> <username> <password>')
   .description('sets the hostname, user, and password for the dokku server')
@@ -70,19 +90,20 @@ app
     });
   });
 
+// run command
+// allows user to run commands remotely through ssh
 app
   .command('run')
   .description('execute commands remotely on dokku remote server')
   .action(function () {
     app.args.pop();
-    var file = {};
-    jf.readFile('config.json', function (err, obj) {
+    jf.readFile('config.json', function (err, file) {
       if (err) {
         console.log('You need to add a server');
+        console.log('Please run dok set <hostname> <username> <password>');
         process.exit(1);
       }else {
-        console.log('accessing the server.....')
-        file = obj;
+        console.log('accessing the server.....');
         var shell = new SSH({
           host: file.host,
           user: file.user,
@@ -91,7 +112,7 @@ app
 
         shell.exec('sudo dokku ' + app.args.join(' '), {
           pty: true,
-          out: function(stdout) {
+          out: function (stdout) {
             console.log(stdout);
           },
           err: function (stderr) {
@@ -102,6 +123,8 @@ app
     });
   });
 
+// clean command
+// allows user to clean the config.json file
 app
   .command('clean')
   .description('removes saved server data from config file')
@@ -116,5 +139,7 @@ app
   });
 
 app.parse(process.argv);
+
+if (!app.args.length) app.help();
 
 module.exports = app;
