@@ -10,9 +10,6 @@ var exec = require('child_process').exec;
 app
   .version(pkg.version);
 
-
-// TODO add git remote add command
-
 app
   .command('add <server> <appname>')
   .action(function (server, appname) {

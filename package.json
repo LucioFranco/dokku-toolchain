@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "mocha": "^2.2.1",
+    "lodash": "^3.6.0",
     "should": "^5.2.0"
   }
 }
