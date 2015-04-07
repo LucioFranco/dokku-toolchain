@@ -5,18 +5,6 @@ var jf = require('jsonfile');
 var util = require('util');
 var pkg = require('./package.json')
 
-function getVersion() {
-  jf.readFileSync('package.json', function (err, res) {
-    if (err) {
-      console.log(err);
-      process.exit(1);
-    }else {
-      console.log(res);
-      return res.verison;
-    }
-  });
-}
-
 app
   .version(pkg.version);
 
