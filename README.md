@@ -1,5 +1,5 @@
-# dok [![Build Status](https://travis-ci.org/LucioFranco/dok.svg)](https://travis-ci.org/LucioFranco/dok)
-Simple dokku toolbelt inspired by Heroku toolbelt
+# dok [![Build Status](https://travis-ci.org/LucioFranco/dokku-toolchain.svg)](https://travis-ci.org/LucioFranco/dokku-toolchain)
+Simple dokku toolchain inspired by Heroku toolbelt
 
 # Usage
 Before you can access the server you must put in your credentials. You must run dok set command first.
