@@ -140,6 +140,6 @@ app
 
 app.parse(process.argv);
 
-if (!app.args.length) app.help();
+if (!app.args.length && !(app.rawArgs[2] == 'run')) app.help();
 
 module.exports = app;
