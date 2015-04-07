@@ -12,9 +12,10 @@ app
 
 app
   .command('add <server> <appname>')
+  .description('adds dokku remote to your git repo')
   .action(function (server, appname) {
     var url = 'dokku@' + server + ':' + appname;
-    fs.exists('.git', function(exists) {
+    fs.exists('.git', function (exists) {
       if (exists) {
         exec('git remote add dokku ' + url, {},function (err, out, code) {
           if (err) {
@@ -32,18 +33,27 @@ app
   });
 
 app
-  .command('help')
+  .command('remove')
+  .description('removes the dokku remote from your git repo')
   .action(function () {
-    console.log('Welcome to dok the dokku toolbelt');
-    console.log(' Commands:');
-    console.log('   run <cmd> - runs any dokku command through ssh');
-    console.log('   set <hostname> <username> <password> - sets the hostname, user, and password for the dokku server');
-    console.log('   clean - removes saved server data from config file');
-    console.log('Thank you for using dok!');
+    fs.exists('.git', function (exists) {
+      if (exists) {
+        exec('git remote remove dokku', {}, function (err, out, code) {
+          if (err) {
+            console.log('Remote does not exsist');
+          }else {
+            console.log('Sucessfully removed remote');
+          }
+        });
+      }else {
+        console.log('This is not a git repo');
+      }
+    })
   });
 
 app
   .command('set <hostname> <username> <password>')
+  .description('sets the hostname, user, and password for the dokku server')
   .action(function (hostname, username, password) {
     var server = {
       host: hostname,
@@ -62,7 +72,7 @@ app
 
 app
   .command('run')
-  .description('execute commands remotely')
+  .description('execute commands remotely on dokku remote server')
   .action(function () {
     app.args.pop();
     var file = {};
@@ -94,6 +104,7 @@ app
 
 app
   .command('clean')
+  .description('removes saved server data from config file')
   .action(function () {
     jf.writeFile('config.json', {  }, function (err) {
       if (err) {
