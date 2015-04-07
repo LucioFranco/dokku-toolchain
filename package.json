@@ -1,7 +1,7 @@
 {
   "name": "dokku-toolchain",
   "version": "0.5.0",
-  "description": "Simple dokku toolbelt inspired from Heroku toolbelt",
+  "description": "Simple dokku toolbelt inspired by Heroku toolbelt",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
