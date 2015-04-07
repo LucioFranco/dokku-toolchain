@@ -3,13 +3,37 @@ var app = require('commander');
 var SSH = require('simple-ssh');
 var jf = require('jsonfile');
 var util = require('util');
-var pkg = require('./package.json')
+var fs = require('fs');
+var pkg = require('./package.json');
+var exec = require('child_process').exec;
 
 app
   .version(pkg.version);
 
 
 // TODO add git remote add command
+
+app
+  .command('add <server> <appname>')
+  .action(function (server, appname) {
+    var url = 'dokku@' + server + ':' + appname;
+    fs.exists('.git', function(exists) {
+      if (exists) {
+        exec('git remote add dokku ' + url, {},function (err, out, code) {
+          if (err) {
+            console.log(err)
+            process.exit(code);
+          }else {
+            console.log('Sucessfully added git remote.');
+            console.log('To push run git push dokku <branch>');
+          }
+        });
+      }else {
+        console.log('This directory is not a git repo');
+      }
+    });
+  });
+
 app
   .command('help')
   .action(function () {
