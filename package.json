@@ -1,5 +1,5 @@
 {
-  "name": "dok",
+  "name": "dokku-toolchain",
   "version": "0.5.0",
   "description": "Simple dokku toolbelt inspired from Heroku toolbelt",
   "main": "index.js",
@@ -8,10 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/LucioFranco/dok"
+    "url": "https://github.com/LucioFranco/dokku-toolchain"
   },
   "keywords": [
-    "dokku"
+    "dokku",
+    "heroku",
+    "devops",
+    "production",
+    "toolchain",
+    "ssh"
   ],
   "author": {
     "name": "Lucio Franco",
@@ -19,9 +24,9 @@
   },
   "license": "GNU",
   "bugs": {
-    "url": "https://github.com/LucioFranco/dok/issues"
+    "url": "https://github.com/LucioFranco/dokku-toolchain/issues"
   },
-  "homepage": "https://github.com/LucioFranco/dok",
+  "homepage": "https://github.com/LucioFranco/dokku-toolchain",
   "dependencies": {
     "commander": "^2.7.1",
     "jsonfile": "^2.0.0",

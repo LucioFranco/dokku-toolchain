@@ -8,6 +8,8 @@ var pkg = require('./package.json')
 app
   .version(pkg.version);
 
+
+// TODO add git remote add command
 app
   .command('help')
   .action(function () {
