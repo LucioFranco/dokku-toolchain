@@ -1,5 +1,8 @@
 # dok [![Build Status](https://travis-ci.org/LucioFranco/dokku-toolchain.svg)](https://travis-ci.org/LucioFranco/dokku-toolchain)
+
 Simple dokku toolchain inspired by Heroku toolbelt
+
+[![NPM](https://nodei.co/npm/dokku-toolchain.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/dokku-toolchain/)
 
 # Usage
 Before you can access the server you must put in your credentials. You must run dok set command first.
