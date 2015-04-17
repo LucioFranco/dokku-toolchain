@@ -6,6 +6,8 @@ Before you can access the server you must put in your credentials. You must run 
 ```
 dok set <hostname> <username> <password>
 ```
+note: if you are going to put code publicly you may want to add config.json to your gitignore. I am working on a way to use ssh keys so that you do not have your password in plain text.
+
 Now you can run this!
 
 ```
