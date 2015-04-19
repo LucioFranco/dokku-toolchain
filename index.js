@@ -6,10 +6,15 @@ var app = require('commander'),
     util = require('util'),
     fs = require('fs'),
     pkg = require('./package.json'),
+    prompt= require('prompt'),
     exec = require('child_process').exec;
 
 app
   .version(pkg.version);
+
+// removing the default prompt message and delimeter
+prompt.message = '';
+prompt.delimiter = '';
 
 // add <appname> command
 // allows user to add git remote name dokku for their server
@@ -22,7 +27,7 @@ app
     jf.readFile('config.json', function (err, obj) {
       if (err) {
         console.log('You need to add a server');
-        console.log('Please run dok set <hostname> <username> <password>');
+        console.log('Please run dok set <hostname> <username>');
         process.exit(1);
       }else {
         server = obj.host;
@@ -55,7 +60,7 @@ app
     jf.readFile('config.json', function (err, file) {
       if (err) {
         console.log('You need to add a server');
-        console.log('Please run dok set <hostname> <username> <password>');
+        console.log('Please run dok set <hostname> <username>');
         process.exit(1);
       }else {
         console.log('Server:');
@@ -109,17 +114,16 @@ app
     });
   });
 
-// set <hostname> <username> <password> command
+// set <hostname> <username> command
 // allows user to setup their dokku server with dok
 // places information into config.json
 app
-  .command('set <hostname> <username> <password>')
+  .command('set <hostname> <username>')
   .description('sets the hostname, user, and password for the dokku server')
-  .action(function (hostname, username, password) {
+  .action(function (hostname, username) {
     var server = {
       host: hostname,
-      user: username,
-      pass: password
+      user: username
     };
 
     jf.writeFile('config.json', server, function (err) {
@@ -127,6 +131,7 @@ app
         console.log(err);
       }else {
         console.log('Sucessfully saved config file');
+        console.log('You will enter your password when you run dok run <command>');
       }
     });
   });
@@ -144,22 +149,41 @@ app
         console.log('Please run dok set <hostname> <username> <password>');
         process.exit(1);
       }else {
-        console.log('accessing the server.....');
-        var shell = new SSH({
-          host: file.host,
-          user: file.user,
-          pass: file.pass
-        });
+        prompt.start();
+        prompt.get({
+            properties: {
+              password: {
+                hidden: true,
+                required: true
+              }
+            }
+          }, function (err, res) {
+            if(err) {
+              console.err(err);
+            }else {
+              console.log('accessing the server.....');
+              var shell = new SSH({
+                host: file.host,
+                user: file.user,
+                pass: res.password
+              });
 
-        shell.exec('sudo dokku ' + app.args.join(' '), {
-          pty: true,
-          out: function (stdout) {
-            console.log(stdout);
-          },
-          err: function (stderr) {
-            console.log(stderr);
-          }
-        }).start();
+              shell.exec('sudo dokku ' + app.args.join(' '), {
+                pty: true,
+                out: function (stdout) {
+                  console.log(stdout);
+                },
+                err: function (stderr) {
+                  console.log(stderr);
+                }
+              }).start({
+                fail: function (err) {
+                  console.log(' Error: There was a problem connecting to the server.');
+                  console.log(' This is probably because you type the wrong password.')
+                }
+              });
+            }
+        });
       }
     });
   });

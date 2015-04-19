@@ -1,6 +1,6 @@
 {
   "name": "dokku-toolchain",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "Simple dokku toolbelt inspired by Heroku toolbelt",
   "main": "index.js",
   "scripts": {
@@ -30,6 +30,7 @@
   "dependencies": {
     "commander": "^2.7.1",
     "jsonfile": "^2.0.0",
+    "prompt": "^0.2.14",
     "simple-ssh": "^0.8.4"
   },
   "preferGlobal": "true",
