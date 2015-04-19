@@ -5,13 +5,14 @@ Simple dokku toolchain inspired by Heroku toolbelt
 [![NPM](https://nodei.co/npm/dokku-toolchain.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/dokku-toolchain/)
 
 # Usage
-Before you can access the server you must put in your credentials. You must run dok set command first.
+Before you can access the server you must put in your server hostname and remote username. You must run dok set command first.
 ```
-dok set <hostname> <username> <password>
+dok set <hostname> <username>
 ```
-note: if you are going to put code publicly you may want to add config.json to your gitignore. I am working on a way to use ssh keys so that you do not have your password in plain text.
 
 Now you can run this!
+
+Note: after running the dok command it will ask you for your remote user's password
 
 ```
 dok run <dokku command>
