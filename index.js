@@ -12,7 +12,7 @@ var app = require('commander'),
 app
   .version(pkg.version);
 
-// removing the default prompt message and delimeter  
+// removing the default prompt message and delimeter
 prompt.message = '';
 prompt.delimiter = '';
 
@@ -27,7 +27,7 @@ app
     jf.readFile('config.json', function (err, obj) {
       if (err) {
         console.log('You need to add a server');
-        console.log('Please run dok set <hostname> <username> <password>');
+        console.log('Please run dok set <hostname> <username>');
         process.exit(1);
       }else {
         server = obj.host;
@@ -60,7 +60,7 @@ app
     jf.readFile('config.json', function (err, file) {
       if (err) {
         console.log('You need to add a server');
-        console.log('Please run dok set <hostname> <username> <password>');
+        console.log('Please run dok set <hostname> <username>');
         process.exit(1);
       }else {
         console.log('Server:');
@@ -114,7 +114,7 @@ app
     });
   });
 
-// set <hostname> <username> <password> command
+// set <hostname> <username> command
 // allows user to setup their dokku server with dok
 // places information into config.json
 app
@@ -131,6 +131,7 @@ app
         console.log(err);
       }else {
         console.log('Sucessfully saved config file');
+        console.log('You will enter your password when you run dok run <command>');
       }
     });
   });
