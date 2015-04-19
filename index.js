@@ -176,7 +176,12 @@ app
                 err: function (stderr) {
                   console.log(stderr);
                 }
-              }).start();
+              }).start({
+                fail: function (err) {
+                  console.log(' Error: There was a problem connecting to the server.');
+                  console.log(' This is probably because you type the wrong password.')
+                }
+              });
             }
         });
       }
