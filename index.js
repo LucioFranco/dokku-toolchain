@@ -113,13 +113,13 @@ app
 // allows user to setup their dokku server with dok
 // places information into config.json
 app
-  .command('set <hostname> <username> <password>')
+  .command('set <hostname> <username> <locationtosshkey')
   .description('sets the hostname, user, and password for the dokku server')
-  .action(function (hostname, username, password) {
+  .action(function (hostname, username, locationtosshkey) {
     var server = {
       host: hostname,
       user: username,
-      pass: password
+      key: locationtosshkey
     };
 
     jf.writeFile('config.json', server, function (err) {
@@ -148,7 +148,7 @@ app
         var shell = new SSH({
           host: file.host,
           user: file.user,
-          pass: file.pass
+          key: file.key
         });
 
         shell.exec('sudo dokku ' + app.args.join(' '), {
