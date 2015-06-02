@@ -61,6 +61,7 @@ app
       if (err) {
         console.log('You need to add a server');
         console.log('Please run dok set <hostname> <username>');
+        console.log(err);
         process.exit(1);
       }else {
         console.log('Server:');
@@ -80,7 +81,7 @@ app
       if (exists) {
         exec('git push dokku ' + branch, {}, function (err, out, code) {
           if (err) {
-            console.log('Could not push to remote');
+            console.log(err);
           }else {
             console.log(out);
             console.log(code);
@@ -178,7 +179,7 @@ app
                 }
               }).start({
                 fail: function (err) {
-                  console.log(' ' + err);
+                  console.log('' + err);
                 }
               });
             }
