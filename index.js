@@ -171,12 +171,8 @@ app
 
               shell.exec('sudo dokku ' + app.args.join(' '), {
                 pty: true,
-                out: function (stdout) {
-                  console.log(stdout);
-                },
-                err: function (stderr) {
-                  console.log(stderr);
-                }
+                out: console.log.bind(console),
+                err: console.error.bind(console)
               }).start({
                 fail: function (err) {
                   console.log('' + err);
