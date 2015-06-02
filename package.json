@@ -1,6 +1,6 @@
 {
   "name": "dokku-toolchain",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Simple dokku toolbelt inspired by Heroku toolbelt",
   "main": "index.js",
   "scripts": {
