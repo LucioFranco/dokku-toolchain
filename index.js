@@ -179,7 +179,7 @@ app
               }).start({
                 fail: function (err) {
                   console.log(' Error: There was a problem connecting to the server.');
-                  console.log(' This is probably because you type the wrong password.')
+                  console.log(' This is probably because you typed the wrong password.')
                 }
               });
             }
