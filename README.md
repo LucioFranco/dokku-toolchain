@@ -46,6 +46,7 @@ npm install
 npm test
 ```
 
+# Sample List of Dokku-alt commands
 
 ```
 Usage: dok COMMAND <app> [command-specific-options]
